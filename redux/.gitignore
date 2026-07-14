@@ -1,0 +1,15 @@
+node_modules
+.env
+build
+dist
+
+server/node_modules
+server/.env
+
+redux/node_modules
+redux/.env
+redux/build
+
+.DS_Store
+npm-debug.log
+yarn-error.log
