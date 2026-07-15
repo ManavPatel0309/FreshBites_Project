@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import Navbar from "./Router/Navbar";
 import Home from "./Router/Home";
@@ -82,6 +83,7 @@ const App = () => {
     <Provider store={Store}>
       <BrowserRouter>
         <AppContent />
+        <Analytics />
       </BrowserRouter>
     </Provider>
   );
