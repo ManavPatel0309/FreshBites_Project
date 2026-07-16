@@ -1,0 +1,8 @@
+
+.env
+server/.env
+redux/.env
+node_modules
+server/node_modules
+redux/node_modules
+redux/build
