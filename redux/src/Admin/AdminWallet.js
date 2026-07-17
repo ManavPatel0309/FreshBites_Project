@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const AdminWallet = () => {
   const navigate = useNavigate();
 
-  const API_BASE = "http://localhost:5000/api/admin";
+  const API_BASE = `${process.env.REACT_APP_API || "http://localhost:5000"}/api/admin`;
 
   const [users, setUsers] = useState([]);
   const [transactions, setTransactions] = useState([]);

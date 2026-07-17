@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api/foods";
+const API_URL = `${process.env.REACT_APP_API || "http://localhost:5000"}/api/foods`;
 
 const AdminFoods = () => {
   const navigate = useNavigate();

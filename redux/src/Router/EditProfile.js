@@ -54,22 +54,24 @@ const EditProfile = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/auth/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          dob: formData.dob,
-          altPhone: formData.altPhone,
-          address: formData.address,
-          profilePhoto: formData.profilePhoto || "",
-        }),
-      });
-
+      const response = await fetch(
+        `${process.env.REACT_APP_API || "http://localhost:5000"}/api/auth/profile`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            phone: formData.phone,
+            dob: formData.dob,
+            altPhone: formData.altPhone,
+            address: formData.address,
+            profilePhoto: formData.profilePhoto || "",
+          }),
+        }
+      );
       const data = await response.json();
 
       if (data.success) {

@@ -17,11 +17,14 @@ const Profile = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/auth/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_API || "http://localhost:5000"}/api/auth/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await res.json();
 
@@ -61,22 +64,24 @@ const Profile = () => {
       const token = localStorage.getItem("token");
 
       try {
-        const res = await fetch("http://localhost:5000/api/auth/profile", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            name: user.name || "",
-            phone: user.phone || "",
-            dob: user.dob || "",
-            altPhone: user.altPhone || "",
-            age: user.age || "",
-            address: user.address || "",
-            profilePhoto: imageBase64,
-          }),
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_API || "http://localhost:5000"}/api/auth/profile`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: user.name || "",
+              phone: user.phone || "",
+              dob: user.dob || "",
+              altPhone: user.altPhone || "",
+              age: user.age || "",
+              address: user.address || "",
+              profilePhoto: imageBase64,
+            }),
+          });
 
         const data = await res.json();
 

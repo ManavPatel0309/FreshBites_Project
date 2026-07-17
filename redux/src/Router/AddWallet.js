@@ -60,17 +60,20 @@ const AddWallet = () => {
 
       setLoading(true);
 
-      const response = await fetch("http://localhost:5000/api/auth/wallet/add", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          amount: money,
-          paymentMethod,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API || "http://localhost:5000"}/api/auth/wallet/add`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            amount: money,
+            paymentMethod,
+          }),
+        }
+      );
 
       const data = await response.json();
 

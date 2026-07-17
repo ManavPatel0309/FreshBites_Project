@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const AdminRiders = () => {
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5000/api/admin";
+  const API_URL = `${process.env.REACT_APP_API || "http://localhost:5000"}/api/admin`;
 
   const [riders, setRiders] = useState([]);
   const [orders, setOrders] = useState([]);

@@ -1,7 +1,7 @@
 const { io } = require("socket.io-client");
 
 // connect to backend server
-const socket = io("http://localhost:5000");
+const socket = io(process.env.REACT_APP_API || "http://localhost:5000");
 
 let lat = 23.0225;   // starting point (Ahmedabad)
 let lng = 72.5714;

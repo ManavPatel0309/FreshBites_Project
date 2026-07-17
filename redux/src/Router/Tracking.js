@@ -155,12 +155,14 @@ const Tracking = () => {
 
       if (!token) return null;
 
-      const response = await fetch("http://localhost:5000/api/orders/my-orders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      const response = await fetch(
+        `${process.env.REACT_APP_API || "http://localhost:5000"}/api/orders/my-orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
 
       if (!data.success) return null;
@@ -185,10 +187,10 @@ const Tracking = () => {
 
       const updatedOrders = exists
         ? oldOrders.map((order) =>
-            Number(order.orderId) === Number(normalized.orderId)
-              ? normalized
-              : order
-          )
+          Number(order.orderId) === Number(normalized.orderId)
+            ? normalized
+            : order
+        )
         : [...oldOrders, normalized];
 
       localStorage.setItem(orderKey, JSON.stringify(updatedOrders));
@@ -215,10 +217,10 @@ const Tracking = () => {
 
       const updatedUserOrders = exists
         ? userOrders.map((order) =>
-            Number(order.orderId) === Number(updatedOrder.orderId)
-              ? updatedOrder
-              : order
-          )
+          Number(order.orderId) === Number(updatedOrder.orderId)
+            ? updatedOrder
+            : order
+        )
         : [...userOrders, updatedOrder];
 
       localStorage.setItem(orderKey, JSON.stringify(updatedUserOrders));
@@ -234,16 +236,19 @@ const Tracking = () => {
 
       if (!token || !orderId) return;
 
-      await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          status: newStatus,
-        }),
-      });
+      await fetch(
+        `${process.env.REACT_APP_API || "http://localhost:5000"}/api/orders/${orderId}/status`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status: newStatus,
+          }),
+        }
+      );
     } catch (error) {
       console.log("Backend Status Update Error:", error);
     }

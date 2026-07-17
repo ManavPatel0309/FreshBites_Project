@@ -24,7 +24,7 @@ const Foods = () => {
   useEffect(() => {
     const fetchFoods = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/foods");
+        const response = await fetch(`${process.env.REACT_APP_API || "http://localhost:5000"}/api/foods`);
         const data = await response.json();
 
         if (data.success) {

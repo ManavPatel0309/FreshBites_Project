@@ -65,10 +65,10 @@ const Checkout = () => {
 
     const updatedOrders = exists
       ? oldOrders.map((order) =>
-          Number(order.orderId) === Number(orderData.orderId)
-            ? orderData
-            : order
-        )
+        Number(order.orderId) === Number(orderData.orderId)
+          ? orderData
+          : order
+      )
       : [...oldOrders, orderData];
 
     localStorage.setItem(orderKey, JSON.stringify(updatedOrders));
@@ -79,14 +79,17 @@ const Checkout = () => {
   const placeBackendOrder = async (orderData) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(orderData),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API || "http://localhost:5000"}/api/orders`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(orderData),
+      }
+    );
 
     return await response.json();
   };
@@ -415,8 +418,8 @@ const Checkout = () => {
                 {loading
                   ? "Placing Order..."
                   : paymentMethod === "cod" || paymentMethod === "wallet"
-                  ? `Place Order ₹${total.toFixed(2)}`
-                  : `Proceed to Payment ₹${total.toFixed(2)}`}
+                    ? `Place Order ₹${total.toFixed(2)}`
+                    : `Proceed to Payment ₹${total.toFixed(2)}`}
               </button>
             </form>
           </div>

@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5000/api/admin/dashboard";
-
+  const API_URL = `${process.env.REACT_APP_API || "http://localhost:5000"}/api/admin/dashboard`;
+  
   const [stats, setStats] = useState({
     totalOrders: 0,
     totalUsers: 0,

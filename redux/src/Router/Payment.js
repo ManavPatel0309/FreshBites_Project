@@ -74,10 +74,10 @@ const Payment = () => {
 
     const updatedOrders = exists
       ? oldOrders.map((item) =>
-          Number(item.orderId) === Number(orderData.orderId)
-            ? orderData
-            : item
-        )
+        Number(item.orderId) === Number(orderData.orderId)
+          ? orderData
+          : item
+      )
       : [...oldOrders, orderData];
 
     localStorage.setItem(orderKey, JSON.stringify(updatedOrders));
@@ -119,14 +119,17 @@ const Payment = () => {
         upiPaymentLink: paymentMethod === "upi" ? upiLink : "",
       };
 
-      const response = await fetch("http://localhost:5000/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(finalPendingOrder),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API || "http://localhost:5000"}/api/orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(finalPendingOrder),
+        }
+      );
 
       const data = await response.json();
 
@@ -299,8 +302,8 @@ const Payment = () => {
           {loading
             ? "Processing..."
             : paymentMethod === "upi"
-            ? "✅ I Have Paid - Place Order"
-            : `Pay ₹${Number(order.total || 0).toFixed(2)}`}
+              ? "✅ I Have Paid - Place Order"
+              : `Pay ₹${Number(order.total || 0).toFixed(2)}`}
         </button>
       </div>
     </div>
